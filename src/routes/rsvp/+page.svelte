@@ -1,7 +1,9 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { client } from '$lib/pocketbase'
-  import { ProgressRadial } from "@skeletonlabs/skeleton";
+  import { ProgressRadial, getToastStore } from "@skeletonlabs/skeleton";
+
+  const toastStore = getToastStore();
 
   let rsvpCode: string = "";
   let loading: boolean = false;
@@ -20,8 +22,12 @@
       loading = false;
       return;
     }
+    try {
     const data = await client.collection('family_codes').getOne(rsvpCode)
     goto("/rsvp/" + data.record);
+    } catch (e) {
+      issue = true;
+    }
     loading = false;
   }
 </script>
@@ -39,7 +45,7 @@
     on:input={goToPanel}
   />
   <p class="{issue ? "opacity-100" : "opacity-0" }">Try Again</p>
-  <div class="{loading ? "opacity-100" : "opacity-0"}">
+  <div class="{loading ? "opacity-100" : "opacity-0"} flex items-center flex-col">
     <ProgressRadial
       ...
       stroke={100}

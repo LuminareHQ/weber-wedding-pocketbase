@@ -12,7 +12,7 @@
 
   const toastStore = getToastStore();
 
-  let listData;
+  let listData = [];
 
   let isAuthed = false;
   let errorMessage = "";
@@ -48,6 +48,7 @@
   }
 
   async function loadData() {
+    listData = [];
     const records = await client
       .collection("family")
       .getFullList({ sort: "last_name", expand: "people" });
@@ -73,36 +74,37 @@
 </script>
 
 {#if client.authStore.isValid}
-  <div class="flex flex-col max-w-2xl m-auto gap-4">
-    <div class="card flex">
-      <table class="table table-auto">
-        <thead>
-          <th colspan="4" class="text-center font-bold text-lg"
-            >Attending Information</th>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Awaiting</th>
-            <th>Attending</th>
-            <th>Not Attending</th>
-            <th>Total</th>
-          </tr>
-          <tr>
-            <td class="text-center font-bold">{countAwaiting}</td>
-            <td class="text-center font-bold">{countAttending}</td>
-            <td class="text-center font-bold">{countNotAttending}</td>
-            <td class="text-center font-bold"
-              >{countAwaiting + countAttending + countNotAttending}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="flex flex-col card">
-      <div class="variant-filled-secondary p-4 overflow-hidden rounded-t-2xl">
-        <h2 class="h2">Party Information</h2>
-        <p>Alphabetical Order</p>
+  {#if listData.length > 0}
+    <div class="flex flex-col max-w-2xl m-auto gap-4 w-[90%] mb-8">
+      <div class="card flex">
+        <table class="table table-auto">
+          <thead>
+            <th colspan="4" class="text-center font-bold text-lg"
+              >Attending Information</th>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Awaiting</th>
+              <th>Attending</th>
+              <th>Not Attending</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td class="text-center font-bold">{countAwaiting}</td>
+              <td class="text-center font-bold">{countAttending}</td>
+              <td class="text-center font-bold">{countNotAttending}</td>
+              <td class="text-center font-bold"
+                >{countAwaiting + countAttending + countNotAttending}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      {#if listData}
+      <div class="flex flex-col card">
+        <div class="variant-filled-secondary p-4 overflow-hidden rounded-t-2xl">
+          <h2 class="h2">Party Information</h2>
+          <p>Alphabetical Order</p>
+        </div>
+
         <Accordion autocollapse>
           {#each listData as family}
             <AccordionItem>
@@ -270,18 +272,19 @@
             </AccordionItem>
           {/each}
         </Accordion>
-      {:else}
-        <div class="flex w-full h-full items-center justify-center">
-          <ProgressRadial
-            value={undefined}
-            stroke={40}
-            meter="stroke-primary-500"
-            track="stroke-primary-500/30"
-            width="w-8" />
-        </div>
-      {/if}
+      </div>
     </div>
-  </div>
+  {:else}
+    <div class="flex w-full h-full flex-col items-center justify-center">
+      <ProgressRadial
+        value={undefined}
+        stroke={40}
+        meter="stroke-primary-500"
+        track="stroke-primary-500/30"
+        width="w-8" />
+        <p>Loading</p>
+    </div>
+  {/if}
 {:else}
   <div
     class="flex flex-col m-auto max-w-2xl h-full w-[90%] gap-2 mb-8 items-center justify-center">

@@ -34,11 +34,12 @@
   {#if people.length < 1}
     <div class="flex flex-col w-full h-full items-center justify-center">
       <ProgressRadial
-        width="w-16"
-        stroke={100}
-        meter="stroke-primary-500"
-        track="stroke-primary-500/30"
-      />
+      ...
+      stroke={100}
+      meter="stroke-primary-500"
+      track="stroke-primary-500/30"
+      width="w-8"
+    />
       <p>Loading Your Party...</p>
     </div>
   {:else}

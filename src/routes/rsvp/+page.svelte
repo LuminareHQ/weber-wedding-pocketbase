@@ -47,6 +47,7 @@
       track="stroke-primary-500/30"
       width="w-8"
     />
+    <p>Locating Your Party...</p>
   </div>
   <!-- <button class="btn variant-filled" on:click={goToPanel}>RSVP</button> -->
 </div>

@@ -105,7 +105,7 @@
           <p>Alphabetical Order</p>
         </div>
 
-        <Accordion autocollapse>
+        <Accordion>
           {#each listData as family}
             <AccordionItem>
               <svelte:fragment slot="lead">

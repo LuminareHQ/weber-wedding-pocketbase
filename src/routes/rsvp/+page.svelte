@@ -76,19 +76,33 @@
 
 <div class="flex flex-col w-auto h-full items-center justify-center gap-4">
     <h1 class="h1">RSVP</h1>
-    <input
-            name="RSVP Code"
-            class="input max-w-[160px] w-full text-xl text-center"
-            type="text"
-            maxlength="4"
-            placeholder="RSVP CODE"
-            style="text-transform: uppercase;"
-            bind:value={rsvpCode}
-            on:input={goToPanel}
-            disabled={!backend_online}
-    />
+    {#if error == null && backend_online}
+        <input
+                name="RSVP Code"
+                class="input max-w-[160px] w-full text-xl text-center"
+                type="text"
+                maxlength="4"
+                placeholder="RSVP CODE"
+                style="text-transform: uppercase;"
+                bind:value={rsvpCode}
+                on:input={goToPanel}
+                disabled={!backend_online}
+        />
+    {:else if error && !backend_online}
+        Backend Offline
+    {:else}
+        <ProgressRadial
+                ...
+                stroke={100}
+                meter="stroke-primary-500"
+                track="stroke-primary-500/30"
+                width="w-8"
+        />
+    {/if}
     <p class="{issue ? "opacity-100" : "opacity-0" }">Try Again</p>
     <div class="{loading ? "opacity-100" : "opacity-0"} flex items-center flex-col">
+
+
 
 
 

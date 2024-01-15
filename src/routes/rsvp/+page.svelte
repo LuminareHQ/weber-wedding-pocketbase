@@ -6,7 +6,7 @@
 
     const toastStore = getToastStore();
 
-    let error = null;
+    let error: any = null;
 
     let rsvpCode: string = "";
     let loading: boolean = false;
@@ -33,13 +33,13 @@
             return;
         }
 
-        let error_toast;
+        let error_toast: any;
 
-        const data = await client.collection('family_codes').getOne(rsvpCode).then((res) => {
+        await client.collection('family_codes').getOne(rsvpCode).then((res) => {
             console.log(res)
             goto("/rsvp/" + res.record)
             loading = false
-        }).catch((e) => {
+        }).catch(() => {
             if (!error_toast) {
                 console.log(error_toast)
                 error_toast = toastStore.trigger({
@@ -99,8 +99,8 @@
                 width="w-8"
         />
     {/if}
-    <p class="{issue ? "opacity-100" : "opacity-0" }">Try Again</p>
-    <div class="{loading ? "opacity-100" : "opacity-0"} flex items-center flex-col">
+    <p class={issue ? "opacity-100" : "opacity-0" }>Try Again</p>
+    <div class={loading ? "opacity-100" : "opacity-0" + " flex items-center flex-col"}>
 
 
 

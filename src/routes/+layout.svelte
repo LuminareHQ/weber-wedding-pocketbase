@@ -2,7 +2,7 @@
 	import '../app.postcss';
 
 	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+	import { computePosition, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup, AppShell, Toast, initializeStores } from '@skeletonlabs/skeleton';
 
 	import { dev } from '$app/environment';
@@ -13,7 +13,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 //   import { title } from 'process';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	storePopup.set({ computePosition, flip, shift, offset, arrow });
 	initializeStores();
 </script>
 

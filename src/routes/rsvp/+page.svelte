@@ -101,17 +101,6 @@
     {/if}
     <p class={issue ? "opacity-100" : "opacity-0" }>Try Again</p>
     <div class={loading ? "opacity-100" : "opacity-0" + " flex items-center flex-col"}>
-
-
-
-
-
-
-
-
-
-
-
     <ProgressRadial
             ...
             stroke={100}

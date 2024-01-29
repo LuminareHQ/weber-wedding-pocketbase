@@ -104,33 +104,35 @@
                 </div>
 
                 <Accordion>
-                    {#each listData as family}
+                    {#each listData as family }
                         <AccordionItem>
-                            <svelte:fragment slot="lead">
-                                <div
-                                        class="rounded-full w-8 h-8 items-center justify-center flex">
-                                    <ProgressRadial
-                                            value={(family.expand.people.filter(
+                                <svelte:fragment slot="lead">
+                                    <div
+                                            class="rounded-full w-8 h-8 items-center justify-center flex">
+                                        <ProgressRadial
+                                                value={(family.expand.people.filter(
                       (person) => person.attending_status === 1
                     ).length /
                       family.expand.people.length) *
                       100}
-                                            font={200}
-                                            stroke={50}
-                                            meter="stroke-success-500"
-                                            track="stroke-success-800">
-                                        {#if family.expand.people.filter((person) => person.attending_status !== 0).length === family.expand.people.length}
-                                            ✅
-                                        {:else}
-                                            {family.expand.people.filter(
-                                                (person) => person.attending_status !== 0
-                                            ).length}/{family.expand.people.length}
-                                        {/if}
-                                    </ProgressRadial>
-                                </div>
-                            </svelte:fragment>
-                            <svelte:fragment slot="summary"
-                            >{family.last_name}</svelte:fragment>
+                                                font={200}
+                                                stroke={50}
+                                                meter="stroke-success-500"
+                                                track="stroke-success-800">
+                                            {#if family.expand.people.filter((person) => person.attending_status !== 0).length === family.expand.people.length}
+                                                ✅
+                                            {:else}
+                                                {family.expand.people.filter(
+                                                    (person) => person.attending_status !== 0
+                                                ).length}/{family.expand.people.length}
+                                            {/if}
+                                        </ProgressRadial>
+                                    </div>
+                                </svelte:fragment>
+                                <svelte:fragment slot="summary"
+                                >
+                                    <p class:variant-filled-surface={listData.indexOf(family) % 2 === 0}>{family.last_name}</p>
+                                </svelte:fragment>
                             <svelte:fragment slot="content">
                                 <hr class="!border-t-4"/>
                                 <div>

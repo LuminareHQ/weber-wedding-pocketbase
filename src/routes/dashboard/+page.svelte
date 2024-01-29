@@ -131,7 +131,7 @@
                                 </svelte:fragment>
                                 <svelte:fragment slot="summary"
                                 >
-                                    <p class:variant-filled-surface={listData.indexOf(family) % 2 === 0}>{family.last_name}</p>
+                                    <p>{family.last_name}</p>
                                 </svelte:fragment>
                             <svelte:fragment slot="content">
                                 <hr class="!border-t-4"/>

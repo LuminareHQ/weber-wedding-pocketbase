@@ -104,16 +104,7 @@
                             <p class="text-xl">{person.name}</p>
                         {/if}
                     </td>
-                    <td class="justify-center"
-                    ><!-- <SlideToggle
-                active="variant-filled-secondary"
-                name={person.id + "_toggle"}
-                checked={person.is_attending}
-                on:change={() => {
-                  person.is_attending = !person.is_attending;
-                  updatePerson(person);
-                }}
-              /> -->
+                    <td class="justify-center">
                         {#if person}
                             <select class="select" name="" id="" bind:value={person.attending_status}
                                     on:change={() => updatePerson(person)}>
@@ -123,8 +114,7 @@
                             </select>
 
                         {/if}
-                    </td
-                    >
+                    </td>
                 </tr>
             {/each}
             </tbody>
@@ -141,7 +131,7 @@
                         <h3 class="h3">Suggest Songs</h3>
                     </svelte:fragment>
                     <svelte:fragment slot="content">
-                        <p>If you would like, suggest a few songs you would like to heard during the reception.</p>
+                        <p>If you would like, suggest a few songs you would like to hear during the reception.</p>
                         <textarea class="input" name="" id="" cols="30" rows="10" bind:value={party.songs}
                                   on:input={updateFamily}></textarea>
                     </svelte:fragment>

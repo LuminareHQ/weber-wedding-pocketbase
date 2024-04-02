@@ -12,7 +12,7 @@
     let loading: boolean = false;
     let issue: boolean = false;
 
-    let backend_online = false;
+    let backend_online = true;
 
     let processing = false;
 
@@ -36,12 +36,10 @@
         let error_toast: any;
 
         await client.collection('family_codes').getOne(rsvpCode).then((res) => {
-            console.log(res)
             goto("/rsvp/" + res.record)
             loading = false
         }).catch(() => {
             if (!error_toast) {
-                console.log(error_toast)
                 error_toast = toastStore.trigger({
                     message: 'Invalid RSVP Code.',
                     background: 'variant-filled-error',
@@ -56,17 +54,30 @@
 
     async function CheckConnection() {
         client.health.check().then((res) => {
-            console.log(res)
             error = null
             backend_online = true
+            toastStore.clear()
+            return true
         }).catch((e) => {
             error = e.message
-            toastStore.trigger({
+            let t = null
+            if ($toastStore.length > 0) return false
+            t = toastStore.trigger({
                 message: 'Error Communicating With Backend.',
                 background: 'variant-filled-error',
                 autohide: false,
+                hideDismiss: true
             })
+            return false
         })
+    }
+
+    $: if (error) {
+        let interval = setInterval(async () => {
+            if (await CheckConnection()) {
+                clearInterval(interval)
+            }
+        }, 5000)
     }
 
     onMount(() => {

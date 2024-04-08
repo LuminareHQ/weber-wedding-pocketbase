@@ -3,7 +3,7 @@
     import {page} from "$app/stores";
     import {client} from "$lib/pocketbase";
 
-    let date = new Date("June 28, 2024, 6:00 PM EST").getTime();
+    let date = new Date("June 28, 2024, 5:00 PM EST").getTime();
 
     let days = 0;
     let hours = 0;

@@ -16,6 +16,8 @@
 
     let processing = false;
 
+    let closeDate = new Date("5-29-2024")
+
     $: {
         rsvpCode = rsvpCode.toUpperCase();
         goToPanel();
@@ -87,7 +89,7 @@
 
 <div class="flex flex-col w-auto h-full items-center justify-center gap-4">
     <h1 class="h1">RSVP</h1>
-    {#if error == null && backend_online}
+    {#if error == null && backend_online && new Date(Date.now()) <= closeDate}
         <input
                 name="RSVP Code"
                 class="input max-w-[160px] w-full text-xl text-center"
@@ -100,7 +102,9 @@
                 disabled={!backend_online}
         />
     {:else if error && !backend_online}
-        Backend Offline
+        <p>Backend Offline</p>
+    {:else if new Date(Date.now()) > closeDate}
+        <p>RSVP Closed</p>
     {:else}
         <ProgressRadial
                 ...
@@ -112,14 +116,14 @@
     {/if}
     <p class={issue ? "opacity-100" : "opacity-0" }>Try Again</p>
     <div class="flex items-center flex-col opacity-0" class:opacity-100={loading}>
-    <ProgressRadial
-            ...
-            stroke={100}
-            meter="stroke-primary-500"
-            track="stroke-primary-500/30"
-            width="w-8"
-    />
-    <p>Locating Your Party...</p>
-</div>
-<!-- <button class="btn variant-filled" on:click={goToPanel}>RSVP</button> -->
+        <ProgressRadial
+                ...
+                stroke={100}
+                meter="stroke-primary-500"
+                track="stroke-primary-500/30"
+                width="w-8"
+        />
+        <p>Locating Your Party...</p>
+    </div>
+    <!-- <button class="btn variant-filled" on:click={goToPanel}>RSVP</button> -->
 </div>

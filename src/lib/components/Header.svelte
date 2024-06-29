@@ -42,7 +42,7 @@
             </div>
             <div class="lg:hidden">
                 <p class="h3">
-                    {(
+                    <!--- {(
                         days +
                         "d " +
                         hours +
@@ -51,7 +51,8 @@
                         "m " +
                         seconds +
                         "s"
-                    ).toString()}
+                    ).toString()} --->
+Complete!
                 </p>
             </div>
             <div class="lg:flex hidden absolute left-4">
